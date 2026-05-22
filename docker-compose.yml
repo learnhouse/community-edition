@@ -1,7 +1,4 @@
-version: "3.9"
-
 name: learnhouse-ce
-
 services:
   learnhouse-app:
     image: ghcr.io/learnhouse/app:latest
@@ -10,8 +7,9 @@ services:
     env_file:
       - .env
     environment:
-      # HOSTNAME needs to be set explicitly for the container
       - HOSTNAME=0.0.0.0
+    volumes:
+      - learnhouse_media_data:/app/api/content
     depends_on:
       db:
         condition: service_healthy
@@ -87,3 +85,4 @@ networks:
 volumes:
   learnhouse_db_data:
   learnhouse_redis_data:
+  learnhouse_media_data:
